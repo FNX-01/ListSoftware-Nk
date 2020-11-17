@@ -15,7 +15,7 @@ try:
 except Exception:
     wb = Workbook() # creates new Workbook
     ws = wb.active  # grab the active worksheet
-    ws.append(["Zeit", "Name des Käufers","Name des Empängers","Jahrgang des Empängers","Klasse des Empängers","Vollmilch Menge", "Zartbitter Menge", "Smarties Menge", "Kitkat Menge", "Anonym"])
+    ws.append(["Zeit", "Name des Käufers","Name des Empängers","Jahrgang des Empängers","Klasse des Empängers","Vollmilch Menge", "Zartbitter Menge", "Anonym"])
 
 
 
@@ -29,14 +29,12 @@ def Eingabe():
 
     vollmilch = input("Vollmilch groß Menge: ")
     zartbitter = input("Zartbitter klein Menge: ")
-    smarties = input("Smarties Menge: ")
-    kitkat = input("Kitkat Menge: ")
 
     anonym = input("Anonym: (J/N): ").lower().startswith("j")
 
-    row = [datetime.datetime.now().strftime(DATEFORMAT), nameBuyer, nameReciever, jahrgang, grade, vollmilch, zartbitter, smarties, kitkat, anonym]
+    row = [datetime.datetime.now().strftime(DATEFORMAT), nameBuyer, nameReciever, jahrgang, grade, vollmilch, zartbitter, anonym]
 
-    print ("Zeit / Name des Käufers / Name des Empängers / Jahrgang des Empängers / Klasse des Empängers / Vollmilch Menge / Zartbitter Menge / Smarties Menge / Kitkat Menge / Anonym")
+    print ("Zeit / Name des Käufers / Name des Empängers / Jahrgang des Empängers / Klasse des Empängers / Vollmilch Menge / Zartbitter Menge / Anonym")
     print("\nRichtig?", row)
     if input("[J]a / [N]ein : ").lower().startswith("j"):
         ws.append(row)
