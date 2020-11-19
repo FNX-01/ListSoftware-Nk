@@ -18,32 +18,34 @@ except Exception:
     ws.append(["Zeit", "Name des Käufers","Name des Empängers","Jahrgang des Empängers","Klasse des Empängers","Vollmilch Menge", "Zartbitter Menge", "Anonym"])
 
 
-
-
-def Eingabe(): 
+def Eingabe():
 
     nameBuyer = input("\nName des Käufers: ")
-    nameReciever = input("Name des Empängers: ")
-    jahrgang = input("Jahrgang des Empängers: ")
-    grade = input("Klasse des Empängers: ")
 
-    vollmilch = input("Vollmilch groß Menge: ")
-    zartbitter = input("Zartbitter klein Menge: ")
+    entrys = int(input("\nAnzahl der Käufe: "))
+    for x in range (0, entrys):
+        nameReciever = input("Name des Empängers "+ str(x+1) +" :")
+        jahrgang = input("Jahrgang des Empängers "+ str(x+1) +" :")
+        grade = input("Klasse des Empängers "+ str(x+1) +" :")
 
-    anonym = input("Anonym: (J/N): ").lower().startswith("j")
+        vollmilch = input("Vollmilch groß Menge: ")
+        zartbitter = input("Zartbitter klein Menge: ")
 
-    row = [datetime.datetime.now().strftime(DATEFORMAT), nameBuyer, nameReciever, jahrgang, grade, vollmilch, zartbitter, anonym]
+        anonym = input("Anonym: (J/N): ").lower().startswith("j")
 
-    print ("Zeit / Name des Käufers / Name des Empängers / Jahrgang des Empängers / Klasse des Empängers / Vollmilch Menge / Zartbitter Menge / Anonym")
-    print("\nRichtig?", row)
-    if input("[J]a / [N]ein : ").lower().startswith("j"):
-        ws.append(row)
-        wb.save(FILENAME)
-        clear()
-        print("\nSaved")
-    else:
-        clear()
-        print("\nCanceled")
+        row = [datetime.datetime.now().strftime(DATEFORMAT), nameBuyer, nameReciever, jahrgang, grade, vollmilch, zartbitter, anonym]
+
+        if input("Speichern: [J]a / [N]ein : ").lower().startswith("j"):
+            ws.append(row)
+            wb.save(FILENAME)
+            if x == (entrys-1):
+                clear()
+                print("\nSaved")
+            else:
+                print("\nNext Entry")
+        else:
+            clear()
+            print("\nCanceled")
 
 
 if __name__ == "__main__":
