@@ -23,44 +23,51 @@ def Eingabe():
     nameBuyer = input("\nName des Käufers: ")
 
     retry = False
-    try:
-        while retry == False:
-            retry = True
-            try:
-                entrys = int(input("\nAnzahl der Käufe: "))
-            except:
-                print("\nWARNING: Anzahl der Käufe muss eine -Zahl- sein")
-                retry = False
-    except KeyboardInterrupt:
-        clear()
-        print("\nCanceled")
+    while retry == False:
+        retry = True
+        try:
+            entrys = int(input("\nAnzahl der Käufe: "))
+        except:
+            print("\nWARNING: Anzahl der Käufe muss eine -Zahl- sein")
+            retry = False
 
 
 
     for x in range (0, entrys):
+        
         nameReciever = input("\nName des Empängers "+ str(x+1) +": ")
+
         jahrgang = input("Jahrgang des Empängers "+ str(x+1) +": ")
         grade = input("Klasse des Empängers "+ str(x+1) +": ")
 
-        vollmilch = input("Vollmilch groß Menge: ")
-        zartbitter = input("Zartbitter klein Menge: ")
+        retryproducts = False
+
+        while retryproducts == False:
+            retryproducts = True
+            try:
+                vollmilch = int(input("Vollmilch groß Menge: "))
+                zartbitter = int(input("Zartbitter klein Menge: "))
+            except:
+                print("\nProduktmengen müssen eine -Zahl- sein")
+                retryproducts = False
+
 
         anonym = input("Anonym: (J/N): ").lower().startswith("j")
 
         row = [datetime.datetime.now().strftime(DATEFORMAT), nameBuyer, nameReciever, jahrgang, grade, vollmilch, zartbitter, anonym]
 
-        if input("Speichern: [J]a / [N]ein : ").lower().startswith("j"):
+        if input("\nZum Speichern ENTER drücken, zum Abbrechen 'STRG + C': ").lower().startswith("n") == False:
             ws.append(row)
             wb.save(FILENAME)
             if x == (entrys-1):
                 clear()
                 print("\nSaved")
             else:
-                print("\nNext Entry")
+                print("\nNächster Eintrag '"+ str(x+2) +"'")
         else:
             clear()
             print("\nCanceled")
-            x + 1
+            x = x + 1
 
 
 if __name__ == "__main__":
