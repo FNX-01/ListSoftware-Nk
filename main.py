@@ -22,11 +22,25 @@ def Eingabe():
 
     nameBuyer = input("\nName des Käufers: ")
 
-    entrys = int(input("\nAnzahl der Käufe: "))
+    retry = False
+    try:
+        while retry == False:
+            retry = True
+            try:
+                entrys = int(input("\nAnzahl der Käufe: "))
+            except:
+                print("\nWARNING: Anzahl der Käufe muss eine -Zahl- sein")
+                retry = False
+    except KeyboardInterrupt:
+        clear()
+        print("\nCanceled")
+
+
+
     for x in range (0, entrys):
-        nameReciever = input("Name des Empängers "+ str(x+1) +" :")
-        jahrgang = input("Jahrgang des Empängers "+ str(x+1) +" :")
-        grade = input("Klasse des Empängers "+ str(x+1) +" :")
+        nameReciever = input("\nName des Empängers "+ str(x+1) +": ")
+        jahrgang = input("Jahrgang des Empängers "+ str(x+1) +": ")
+        grade = input("Klasse des Empängers "+ str(x+1) +": ")
 
         vollmilch = input("Vollmilch groß Menge: ")
         zartbitter = input("Zartbitter klein Menge: ")
@@ -46,6 +60,7 @@ def Eingabe():
         else:
             clear()
             print("\nCanceled")
+            x + 1
 
 
 if __name__ == "__main__":
